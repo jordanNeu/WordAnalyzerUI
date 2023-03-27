@@ -16,14 +16,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
-// Program that imports a .txt file and analyzes it for the individual words and then prints the duplicates in descening
+// Program that imports a .txt file and analyzes it for the individual words and then prints the duplicates in descending
 // order, with a UI
 
 public class HelloApplication extends Application {
 
     // HashMap container is created that will hold our commonly seen words
     private HashMap<String, Integer> wordCount = new HashMap<>();
-
     @Override
     public void start(Stage primaryStage) {
 
@@ -67,10 +66,10 @@ public class HelloApplication extends Application {
             for (String word : words) {
                 if (!wordCount.containsKey(word)) {
                     wordCount.put(word, 1);
-                    // If its the first time seeing a word it will log it..
+                    // If it's the first time seeing a word it will log it.
                 } else {
                     wordCount.put(word, wordCount.get(word) + 1);
-                    // Otherwise if its a duplicate it will count it towards existing logs
+                    // Otherwise if it's a duplicate it will count it towards existing logs
                 }
             }
             resultLabel.setText("Total Words: " + words.length + ", unique words: " + wordCount.size());
@@ -113,8 +112,12 @@ public class HelloApplication extends Application {
         primaryStage.setTitle("Word Analyzer");
         primaryStage.show();
     }
-
     public static void main(String[] args) {
         launch(args);
+    }
+    public class TxtDetector {
+        public static boolean detectTxtFile(String fileName) {
+            return fileName != null && fileName.toLowerCase().endsWith(".txt");
+        }
     }
 }
