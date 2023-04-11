@@ -1,3 +1,13 @@
+/**
+ * 'HelloApplication' is a JavaFX program that is built upon a previous Java application
+ * It's purpose is to import a .txt file and analyze it for the amount of duplicate
+ * words found within the document.
+ * The program prints the words along with their count in descending order, all
+ * within a GUI
+ *  * @author Jordan Neumann
+ *  * @version 1.3
+ *  * @since 2023-01-01
+ */
 package com.example.ui;
 
 import java.io.File;
@@ -16,16 +26,28 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
-// Program that imports a .txt file and analyzes it for the individual words and then prints the duplicates in descending
-// order, with a UI
-
 public class HelloApplication extends Application {
-
-    // HashMap container is created that will hold our commonly seen words
     private HashMap<String, Integer> wordCount = new HashMap<>();
+    /**
+     * The 'start' method prompts the UI to open allowing us to import a .txt file
+     * and allowing us to interact with the application
+     * @param primaryStage
+     *
+     * This class holds the majority of our program, it launches the GUI that allows us to
+     * interact with the program
+     */
     @Override
     public void start(Stage primaryStage) {
-
+        /**
+         * @param wordCount A HashMap that holds the amount of words counted by our program
+         * @param fileLabel The Label for our file browser source
+         * @param textArea This is the window that will display our text once a .txt file is selected
+         * @param browseButton This is a button that will open a file-browser that accepts .txt files
+         * @param analyzeButton This button will call the method to loop through our selected .txt
+         * @param resultLabel This area begins the listing of our found-words
+         * @param wordCountsArea This text area lists the count for each word found
+         * @return null
+         */
         wordCount = new HashMap<>();
         // Elements of our UI, including Buttons and Text Areas
         Label fileLabel = new Label("No File Selected");
@@ -55,7 +77,6 @@ public class HelloApplication extends Application {
                     ex.printStackTrace();
                 }
             }
-
         });
         // The Analyze button is a continuation on our Module 2 project, it initiated the splitting of our .txt file
         // into individual words that will be analyzed and checked for duplicates, adding these up as it iterates
@@ -73,7 +94,6 @@ public class HelloApplication extends Application {
                 }
             }
             resultLabel.setText("Total Words: " + words.length + ", unique words: " + wordCount.size());
-
 
             wordCountsArea.getChildren().clear();
             List<String> repeatedWords = new ArrayList<>();
@@ -105,16 +125,24 @@ public class HelloApplication extends Application {
         box.setSpacing(10);
         box.setPadding(new Insets(10));
         box.getChildren().addAll(fileLabel, textArea, browseButton, analyzeButton, resultLabel, wordCountsArea);
-
         // Dictates the dimensions of the window that will appear once program is run
         Scene scene = new Scene(box, 600, 800);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Word Analyzer");
         primaryStage.show();
     }
+    /**
+     * This is the main method that will launch our GUI and allow us to use our application
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }
+    /**
+     * 'TxtDetector' is connected to our test method and only checks to see if a .txt file
+     * is present in our browseButton browser
+     * @return fileName
+     */
     public class TxtDetector {
         public static boolean detectTxtFile(String fileName) {
             return fileName != null && fileName.toLowerCase().endsWith(".txt");
